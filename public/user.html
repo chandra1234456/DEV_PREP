@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Questions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-explore">
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="page-header">
+      <h1>Explore <span>Questions</span></h1>
+      <p>Browse, filter, and discover challenges at your level</p>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search questions…" />
+    </div>
+
+    <!-- Difficulty Filters -->
+    <div id="difficultyFilters">
+      <button data-difficulty="All" class="active">All</button>
+      <button data-difficulty="Basic">Basic</button>
+      <button data-difficulty="Intermediate">Medium</button>
+      <button data-difficulty="Advanced">Hard</button>
+    </div>
+
+    <!-- Question List -->
+    <div id="contentList" class="grid"></div>
+
+  </div>
+
+  <script type="module" src="user.js"></script>
+
+  <!-- Filter active-state toggle (works without user.js) -->
+  <script>
+    document.querySelectorAll('#difficultyFilters button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#difficultyFilters button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
