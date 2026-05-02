@@ -1,6 +1,6 @@
 import { auth } from './firebase-config.js';
-import { signInWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { signInWithEmailAndPassword }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const loginBtn = document.getElementById('loginBtn');
 const errorMsg = document.getElementById('errorMsg');
@@ -24,8 +24,16 @@ loginBtn.addEventListener('click', async () => {
 
         console.log("Login successful:", user);
 
-        // ✅ Direct redirect (NO ROLE CHECK)
-        window.location.href = "user.html";
+        // Role-based redirect
+        if (user.email === "admin@gmail.com") {
+            window.location.href = "admin.html";
+        }
+        else if (user.email === "bala@gmail.com") {
+            window.location.href = "user.html";
+        }
+        else {
+            errorMsg.innerText = "Unauthorized user";
+        }
 
     } catch (error) {
         console.error(error);
