@@ -25,7 +25,7 @@ loginBtn.addEventListener('click', async () => {
         console.log("Login successful:", user);
 
         // Role-based redirect
-        if (user.email === "Admin@gmail.com") {
+        if (user.email === "admin@gmail.com") {
             window.location.href = "admin.html";
         }
         else if (user.email === "bala@gmail.com") {
