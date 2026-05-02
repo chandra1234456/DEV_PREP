@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Answer Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-details">
+
+  <div class="container">
+
+    <!-- Back Button -->
+    <button class="btn-back" onclick="window.history.back()">← Back</button>
+
+    <!-- Answer Content (populated by details.js) -->
+    <div id="answerContainer">
+      <!--
+        Your details.js should inject structure like:
+
+        <p class="detail-question">What is a closure in JavaScript?</p>
+        <div class="detail-meta">
+          <span class="badge badge-intermediate">Medium</span>
+        </div>
+        <p class="detail-section-title">Answer</p>
+        <div class="answer-box">…</div>
+        <p class="detail-section-title">Code Example</p>
+        <pre>…</pre>
+      -->
+    </div>
+
+  </div>
+
+  <script type="module" src="details.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Admin Dashboard</title>
+</head>
+<body class="page-admin">
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="admin-header">
+      <div>
+        <span class="admin-badge">⚡ Admin</span>
+        <h1 style="margin-top:10px;">Add <em>Question</em></h1>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="adminForm">
+
+      <!-- Category -->
+      <div class="field-group">
+        <label>
+          <span class="field-icon">◈</span> Category
+        </label>
+        <input type="text" id="category" placeholder="e.g. JavaScript, React, CSS…" required>
+      </div>
+
+      <!-- Difficulty -->
+      <div class="field-group">
+        <label>
+          <span class="field-icon">◎</span> Difficulty
+        </label>
+        <select id="difficulty" required>
+          <option value="" disabled selected>Select difficulty…</option>
+          <option value="Basic">Basic</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+
+      <!-- Question -->
+      <div class="field-group">
+        <label>
+          <span class="field-icon">?</span> Question
+        </label>
+        <input type="text" id="question" placeholder="Enter the question…" required>
+      </div>
+
+      <!-- Answer -->
+      <div class="field-group">
+        <label>
+          <span class="field-icon">✎</span> Answer
+        </label>
+        <textarea id="answer" placeholder="Write a clear, concise answer…" rows="5" required></textarea>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Image URL (optional) -->
+      <div class="field-group">
+        <label>
+          <span class="field-icon">🖼</span> Image URL
+          <span class="field-optional">Optional</span>
+        </label>
+        <input type="text" id="imageUri" placeholder="https://…">
+      </div>
+
+      <!-- Code Block (optional) -->
+      <div class="field-group">
+        <label>
+          <span class="field-icon">&lt;/&gt;</span> Code Block
+          <span class="field-optional">Optional</span>
+        </label>
+        <textarea id="codeBlock" placeholder="Paste your code here…" rows="10"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">
+        Save to Firestore
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+             style="vertical-align:middle; margin-left:8px;">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+          <polyline points="7 3 7 8 15 8"/>
+        </svg>
+      </button>
+
+      <!-- Status message injected by admin.js -->
+      <div id="adminStatus"></div>
+
+    </form>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
