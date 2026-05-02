@@ -1,142 +1,120 @@
 # 🚀 Interview Questions & Answers Web App
 
-A web-based application built using **Firebase Authentication** and **Cloud Firestore** that allows admins to add interview questions and users to view them in real-time.
+A web-based learning app built with **Firebase Authentication** and **Cloud Firestore**. Admins can add interview questions, and users can browse and view answers.
 
 ---
 
+* GitHubPages : https://chandra1234456.github.io/DEV_PREP/user.html
+
 ## 📌 Project Overview
 
-This application consists of **3 main screens**:
+This project includes the following pages inside the `docs/` folder:
 
 1. 🔐 **Login Page**
+   * `docs/index.html`
+   * Users sign in with email and password
 
-   * Users log in using email & password
-   * Authentication handled via Firebase
+2. 🛠️ **Admin Page**
+   * `docs/admin.html`
+   * Admins can add questions, answers, images, and optional code snippets
 
-2. 🛠️ **Admin Panel**
+3. 👀 **Explore / User Page**
+   * `docs/user.html`
+   * Users can search, filter by difficulty, and open question details
 
-   * Admin can add interview questions and answers
-   * Data is stored in Firestore database
-
-3. 👀 **User Dashboard**
-
-   * Users can view all submitted interview questions & answers
-   * Real-time updates using Firestore
+4. 📄 **Question Details**
+   * `docs/details.html`
+   * Shows the full answer, optional image, and code example
 
 ---
 
 ## ✨ Features
 
-* 🔑 Secure login using Firebase Authentication
-* 🧑‍💼 Role-based access (Admin / User)
-* ☁️ Cloud Firestore database integration
-* 🔄 Real-time data updates
-* 📱 Simple and clean UI
+* 🔑 Firebase Email/Password login
+* ☁️ Firestore-backed question storage
+* 🔍 Search and difficulty filtering
+* 📂 Category-aware question collection structure
+* ✨ Clean dark UI with cards and animations
 
 ---
 
 ## 🏗️ Tech Stack
 
 * **Frontend:** HTML, CSS, JavaScript
-* **Backend/Database:** Firebase
-
-  * Firebase Authentication
-  * Cloud Firestore
+* **Database:** Firebase Cloud Firestore
+* **Auth:** Firebase Authentication
 
 ---
 
 ## 📂 Project Structure
 
 ```
-interview-qa-app/
-│
-├── index.html          # Login Page
-├── admin.html          # Admin Panel
-├── dashboard.html      # User Dashboard
-│
-├── css/
-│   └── styles.css
-│
-├── js/
-│   ├── firebase-config.js
+DEV_PREP/
+├── docs/
+│   ├── index.html
+│   ├── admin.html
+│   ├── user.html
+│   ├── details.html
 │   ├── auth.js
 │   ├── admin.js
-│   └── dashboard.js
-│
+│   ├── user.js
+│   ├── details.js
+│   ├── firebase-config.js
+│   ├── style.css
+│   └── README.md
 └── README.md
 ```
+
+> The app is served from the `docs/` folder in this repository.
 
 ---
 
 ## 🔥 Firebase Setup
 
-1. Go to Firebase Console
-
-2. Create a new project
-
-3. Enable:
-
-   * Authentication → Email/Password
-   * Firestore Database
-
-4. Add your Firebase config in:
-
-```
-js/firebase-config.js
-```
+1. Create a Firebase project at https://console.firebase.google.com
+2. Enable **Authentication → Email/Password**
+3. Enable **Firestore Database**
+4. Add your Firebase configuration to `docs/firebase-config.js`
 
 ---
 
-## 🔐 Authentication
+## 🗄️ Firestore Data Model
 
-* Users sign in using email & password
-* Admin access can be controlled by:
+The app currently uses a `Categories` collection for questions:
 
-  * Hardcoded email
-  * OR storing roles in Firestore (`users` collection)
+```
+Categories (collection)
+  ├── <categoryName> (document)
+        ├── questions (subcollection)
+              ├── <questionId> (document)
+                    ├── category: string
+                    ├── difficulty: string
+                    ├── question: string
+                    ├── answer: string
+                    ├── imageUri: string | null
+                    ├── code: string | null
+                    ├── timestamp: timestamp
+```
+
+This structure makes it easy to group questions by category while keeping the UI filterable.
 
 ---
 
-## 🗄️ Firestore Database Structure
+## ▶️ Run Locally
 
-```
-questions (collection)
-   ├── docId
-       ├── question: string
-       ├── answer: string
-       ├── createdAt: timestamp
-```
+### Option 1: Open directly
 
-Optional:
+Open `docs/index.html` in your browser.
 
-```
-users (collection)
-   ├── userId
-       ├── role: "admin" | "user"
-```
+### Option 2: Use Live Server
+
+If you use VS Code, install the Live Server extension and open the `docs/` folder.
 
 ---
 
-## ▶️ How to Run the Project
+## 🚀 Optional Deployment
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/interview-qa-app.git
-cd interview-qa-app
-```
-
-2. Open in browser:
-
-* Open `index.html`
-  OR
-* Use Live Server in VS Code
-
----
-
-## 🚀 Deployment (Optional)
-
-You can deploy using Firebase Hosting:
+Deploy to Firebase Hosting using:
 
 ```bash
 npm install -g firebase-tools
@@ -147,14 +125,13 @@ firebase deploy
 
 ---
 
-## 🛡️ Firestore Security Rules (Basic)
+## 🛡️ Suggested Firestore Rules
 
-```
+```js
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    match /questions/{doc} {
+    match /Categories/{categoryId}/questions/{questionId} {
       allow read: if request.auth != null;
       allow write: if request.auth != null;
     }
@@ -164,29 +141,10 @@ service cloud.firestore {
 
 ---
 
-## 📸 Screenshots (Add Here)
+## 📌 Notes
 
-> You can add screenshots of:
-
-* Login Page
-* Admin Panel
-* User Dashboard
-
-Example:
-
-```
-![Login Page](screenshots/login.png)
-```
-
----
-
-## 📌 Future Enhancements
-
-* 🔍 Search functionality
-* ✏️ Edit/Delete questions
-* ⭐ Favorite questions
-* 📊 Admin analytics dashboard
-* 📱 Fully responsive design
+* Admin role control is not enforced in the current UI.
+* The project is a solid starting point for role-based access, edit/delete flows, and responsive enhancements.
 
 ---
 
@@ -211,5 +169,3 @@ If you like this project:
 * ⭐ Star the repository
 * 🍴 Fork it
 * 📢 Share it
-
----
