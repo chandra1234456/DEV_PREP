@@ -1,25 +1,22 @@
-name: Deploy GitHub Pages
+name: Dummy Workflow
 
 on:
   push:
     branches: [main]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./docs
+      - name: Say Hello
+        run: echo "Hello! Workflow is running successfully 🚀"
 
-      - name: Deploy
-        uses: actions/deploy-pages@v4
+      - name: List files
+        run: ls -R
+
+      - name: Done
+        run: echo "No deployment, just testing CI/CD"
